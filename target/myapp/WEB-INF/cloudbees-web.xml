@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<cloudbees-web-app xmlns="http://www.cloudbees.com/xml/webapp/1">     
+    <appid>training2.2.1</appid>
+    <context-param>
+        <param-name>application.environment</param-name>
+        <param-value>prod</param-value>
+    </context-param>
+    
+   <resource name="jdbc/testDynamicPass" auth="Container" type="javax.sql.DataSource">
+    <param name="username" value="vale" />
+    <param name="password" value="${db.password}"/>
+    <param name="url" value="jdbc:mysql://ec2-176-34-253-124.eu-west-1.compute.amazonaws.com:3306/testDynamicPass" />
+
+    <!-- Connection Pool settings -->
+    <param name="maxActive" value="5" />
+    <param name="maxIdle" value="2" />
+    <param name="maxWait" value="10000" />
+    <param name="removeAbandoned" value="true" />
+    <param name="removeAbandonedTimeout" value="60" />
+    <param name="logAbandoned" value="true" />
+
+    <!-- Purge invalid connections -->
+    <param name="validationQuery" value="SELECT 1" />
+    <param name="testOnBorrow" value="true" />
+   </resource>
+   
+       <resource name="mail/SendGrid" auth="Container"  type="javax.mail.Session">
+        <param name="mail.debug" value="false" />
+    </resource>
+    
+    
+</cloudbees-web-app>
